@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApp</string>
+    <string name="app_name">VC Calling</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
