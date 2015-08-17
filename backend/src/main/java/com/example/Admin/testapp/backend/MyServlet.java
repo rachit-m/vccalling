@@ -4,7 +4,7 @@
    https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloWorld
 */
 
-package com.housing.vccalling.backend_servlet;
+package com.example.Admin.testapp.backend;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class MyServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         resp.setContentType("text/plain");
-        resp.getWriter().println("Please use the form to POST to this url");
+        resp.getWriter().println("Hello Working");
     }
 
     @Override
