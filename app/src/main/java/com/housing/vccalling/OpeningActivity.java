@@ -3,7 +3,9 @@ package com.housing.vccalling;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +22,7 @@ public class OpeningActivity extends ActionBarActivity {
 
     TextView tvfrst,tvscnd,tvres;
     Button ok;
-    EditText etfrst,etscnd;
+    EditText etfrst,etscnd,etpin;
 
 
     @Override
@@ -28,22 +30,25 @@ public class OpeningActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
 
-        new ServletPostAsyncTask().execute(new Pair<Context, String>(this, "Rachit"));
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_opening, menu);
         ok = (Button) findViewById(R.id.btnadd);
         tvres = (TextView) findViewById(R.id.tvres);
         etfrst = (EditText) findViewById(R.id.etfrst);
         etscnd = (EditText) findViewById(R.id.etscnd);
+        etpin = (EditText) findViewById(R.id.etpin);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double x=0,y=0,z=0;
+                String x, y, z;
+
                /* if( (etfrst.getText().toString().matches("")) || (etscnd.getText().toString().matches("")) )
                 {
                     Context ctx = getApplicationContext();
@@ -51,21 +56,38 @@ public class OpeningActivity extends ActionBarActivity {
                    // Toast.
                 }*/
 
-                if(TextUtils.isEmpty(etfrst.getText().toString()))
-                {
+                if (TextUtils.isEmpty(etfrst.getText().toString())) {
                     etfrst.setError("Field can not be blank");
-                }
-                else if(TextUtils.isEmpty(etscnd.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(etscnd.getText().toString())) {
                     etscnd.setError("Field can not be blank");
+                } else {
+                    x = etfrst.getText().toString();
+                    y = etscnd.getText().toString();
+                    new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(), x));
+                    tvres.setText("Enter the pin");
+                    etpin.setVisibility(View.VISIBLE);
                 }
-                else
-                {
-                          x = Double.parseDouble(etfrst.getText().toString());
-                          y = Double.parseDouble(etscnd.getText().toString());
-                          z = x - y;
-                    tvres.setText("Result is" + z);
-                }
+            }
+        });
+        etpin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            if(s.length()==4)
+            {                    tvres.setText("Pin complete");
+                new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(),s.toString()));
+
+
+            }
             }
         });
         return true;

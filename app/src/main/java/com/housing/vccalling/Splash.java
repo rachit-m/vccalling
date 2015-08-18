@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 
 /**
  * Created by Admin on 12-06-2015.
@@ -29,7 +30,8 @@ public class Splash extends Activity
               }
               finally
               {
-                  Intent opnactvty = new Intent("com.example.admin.OPENINGACTIVITY");
+                  Intent opnactvty = new Intent("com.housing.vccalling.OPENINGACTIVITY");
+                  Log.d("Intent", opnactvty.getAction());
                   startActivity(opnactvty);
               }
           }
