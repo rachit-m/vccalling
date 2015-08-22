@@ -29,12 +29,21 @@ class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
         String name = params[0].second;
 
         HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost("https://api.ringcaptcha.com/5i8o6eme1e8emi2yfu3i/code/sms"); // 10.0.2.2 is localhost's IP address in Android emulator
+        HttpPost httpPost;
+        if(name.length() < 14)
+        {        httpPost = new HttpPost("https://api.ringcaptcha.com/5i8o6eme1e8emi2yfu3i/code/sms"); }// 10.0.2.2 is localhost's IP address in Android emulator
+        else
+        {httpPost = new HttpPost("https://api.ringcaptcha.com/5i8o6eme1e8emi2yfu3i/verify");}
 
         try {
             // Add name data to request
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("phone", name));
+            if(name.length() < 14)
+            {nameValuePairs.add(new BasicNameValuePair("phone", name));}
+
+            else
+            {nameValuePairs.add(new BasicNameValuePair("code",name.substring(0,4)));
+             nameValuePairs.add(new BasicNameValuePair("phone",name.substring(4)));}
             nameValuePairs.add(new BasicNameValuePair("api_key", "236c7aef0b5c57a7fd27fcbb29a84335a718c574"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

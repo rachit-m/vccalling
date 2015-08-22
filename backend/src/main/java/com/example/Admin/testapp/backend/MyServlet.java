@@ -1,14 +1,22 @@
-/*
-   For step-by-step instructions on connecting your Android application to this backend module,
-   see "App Engine Java Servlet Module" template documentation at
-   https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloWorld
-*/
-
 package com.housing.vccalling.backend;
 
 import java.io.IOException;
 
 import javax.servlet.http.*;
+
+
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+
 
 public class MyServlet extends HttpServlet {
     @Override
@@ -26,6 +34,30 @@ public class MyServlet extends HttpServlet {
         if (name == null) {
             resp.getWriter().println("Please enter a name");
         }
+
+
+        Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        String msgBody = "Hello" + name;
+
+        try {
+            resp.getWriter().println("Hello World");
+
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress("rachit.iitkgp@gmail.com", "VCCalling Admin"));
+            msg.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress("rachit.iitkgp@gmail.com", "Mr. Developer"));
+            msg.setSubject("Please verify that your phone number is");
+            msg.setText(msgBody);
+            Transport.send(msg);
+
+        } catch (AddressException e) {
+            // ...
+        } catch (MessagingException e) {
+            // ...
+        }
+
         resp.getWriter().println("Hello " + name);
     }
 }

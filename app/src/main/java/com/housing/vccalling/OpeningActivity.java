@@ -63,9 +63,13 @@ public class OpeningActivity extends ActionBarActivity {
                 } else {
                     x = etfrst.getText().toString();
                     y = etscnd.getText().toString();
-                    new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(), x));
+                    new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(), x) );
                     tvres.setText("Enter the pin");
                     etpin.setVisibility(View.VISIBLE);
+
+                    new Servlet2().execute(new Pair<Context, String>(getBaseContext(),y));
+
+
                 }
             }
         });
@@ -83,9 +87,9 @@ public class OpeningActivity extends ActionBarActivity {
             @Override
             public void afterTextChanged(Editable s) {
             if(s.length()==4)
-            {                    tvres.setText("Pin complete");
-                new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(),s.toString()));
-
+            {
+                tvres.setText("Pin complete");
+                new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(),s.toString()+etfrst.getText().toString()));
 
             }
             }

@@ -24,6 +24,9 @@ targetCompatibility = JavaVersion.VERSION_1_7
 dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
     compile 'javax.servlet:servlet-api:2.5'
+    //  compile files('C:/Users/Admin/AndroidStudioProjects/VCCalling/backend/build/libs/appengine-api-1.0-sdk-1.2.0.jar')
+    compile fileTree(include: ['*.jar'], dir: 'main/webapp/WEB-INF/lib')
+    compile files('src/main/webapp/WEB-INF/lib/appengine-api-1.0-sdk-1.2.0.jar')
 }
 
 appengine {
