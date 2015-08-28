@@ -29,8 +29,8 @@ public class Splash extends Activity
                   e.printStackTrace();
               }
               finally
-              {
-                  Intent opnactvty = new Intent("com.housing.vccalling.OPENINGACTIVITY");
+              { //Intent opnactvty = new Intent("com.housing.vccalling.RECARDVIEWACTIVITY");
+                 Intent opnactvty = new Intent("com.housing.vccalling.OPENINGACTIVITY");
                   Log.d("Intent", opnactvty.getAction());
                   startActivity(opnactvty);
               }

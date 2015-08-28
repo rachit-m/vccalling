@@ -1,6 +1,7 @@
 package com.housing.vccalling;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
@@ -20,12 +21,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private Context context;
+    private Integer flag = 0;
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
-        context = params[0].first;
+        context = params[0].first.getApplicationContext();
         String name = params[0].second;
 
         HttpClient httpClient = new DefaultHttpClient();
@@ -42,7 +45,8 @@ class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
             {nameValuePairs.add(new BasicNameValuePair("phone", name));}
 
             else
-            {nameValuePairs.add(new BasicNameValuePair("code",name.substring(0,4)));
+            {flag = 1;
+                nameValuePairs.add(new BasicNameValuePair("code",name.substring(0,4)));
              nameValuePairs.add(new BasicNameValuePair("phone",name.substring(4)));}
             nameValuePairs.add(new BasicNameValuePair("api_key", "236c7aef0b5c57a7fd27fcbb29a84335a718c574"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -67,5 +71,16 @@ class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+if(flag == 1)
+{super.onPostExecute(result);
+        Intent i = new Intent("com.housing.vccalling.RECARDVIEWACTIVITY");
+        Log.d("Intent", i.getAction());
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);}
+    //    Intent i = new Intent(context,RecyclerViewActivity.class);
+     //   context.startActivity(i);
+
+
+
     }
 }

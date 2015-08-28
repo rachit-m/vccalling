@@ -1,11 +1,13 @@
 package com.housing.vccalling;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,7 +92,10 @@ public class OpeningActivity extends ActionBarActivity {
             {
                 tvres.setText("Pin complete");
                 new ServletPostAsyncTask().execute(new Pair<Context, String>(getBaseContext(),s.toString()+etfrst.getText().toString()));
-
+                Toast.makeText(getBaseContext(), "Out of the async task", Toast.LENGTH_LONG).show();
+                //Intent i = new Intent("com.housing.vccalling.CARDVIEWACTIVITY");
+                //Log.d("Intent", i.getAction());
+                //startActivity(i);
             }
             }
         });

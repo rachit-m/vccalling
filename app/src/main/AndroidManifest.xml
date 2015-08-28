@@ -27,6 +27,24 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:label="@string/title_activity_recycler_view" >
+            <intent-filter>
+                <action android:name="com.housing.vccalling.RECARDVIEWACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CardViewActivity"
+            android:label="@string/title_activity_card_view" >
+            <intent-filter>
+                <action android:name="com.housing.vccalling.CARDVIEWACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
