@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JsonProject/JsonProject.iml" filepath="$PROJECT_DIR$/JsonProject/JsonProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Jsonreader/Jsonreader.iml" filepath="$PROJECT_DIR$/Jsonreader/Jsonreader.iml" />
       <module fileurl="file://$PROJECT_DIR$/VCCalling.iml" filepath="$PROJECT_DIR$/VCCalling.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />

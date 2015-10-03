@@ -45,6 +45,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReaderActivity"
+            android:label="@string/title_activity_reader" >
+            <intent-filter>
+                <action android:name="com.housing.vccalling.READERACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

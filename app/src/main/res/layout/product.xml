@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/name"
+        android:text="Amul Ghee"
+        android:layout_width="0dp"
+        android:layout_weight=".10"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:text="1"
+        android:layout_width="0dp"
+        android:layout_weight=".50"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/price"
+        android:text="180"
+        android:layout_width="0dp"
+        android:layout_weight=".10"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/picture"
+        android:text="http://google.com"
+        android:layout_width="0dp"
+        android:layout_weight=".10"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/username"
+        android:text="rachit.iitkgp"
+        android:layout_width="0dp"
+        android:layout_weight=".10"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
