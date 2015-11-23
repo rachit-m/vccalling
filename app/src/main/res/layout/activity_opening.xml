@@ -7,17 +7,16 @@
     android:id="@+id/opnac">
 
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etfrst"
-        android:textSize="30sp"
-        android:hint="Enter the employee number"
+        android:textSize="20sp"
+        android:hint="Paste the whatsapp chat"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
         android:background="#ffc4ff4a"
-        android:inputType="numberDecimal"
         android:layout_alignRight="@+id/etscnd"
         android:layout_alignEnd="@+id/etscnd" />
 
@@ -25,21 +24,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etscnd"
-        android:textSize="30sp"
-        android:hint="Enter the employee ID"
-        android:background="#ffb9ff24"
+        android:textSize="15sp"
+        android:hint="Your conversation will appear here. Just click on paste above."
+        android:background="@drawable/textinputborder"
         android:layout_below="@+id/etfrst"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="44dp" />
 
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etpin"
-        android:hint="4 digit pin"
-        android:textSize="30sp"
+        android:hint="Tag the conversation"
+        android:textSize="20sp"
         android:background="#ffb9ff24"
         android:visibility="invisible"
         android:layout_below="@+id/etscnd"
@@ -50,9 +49,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User verification"
+        android:text=""
         android:id="@+id/tvres"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:layout_below="@+id/etpin"
         android:layout_marginTop="48dp"
         android:layout_alignParentRight="true"

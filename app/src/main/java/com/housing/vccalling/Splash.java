@@ -15,8 +15,8 @@ public class Splash extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        MediaPlayer oursong = MediaPlayer.create(Splash.this,R.raw.musica_sound);
-        oursong.start();
+       // MediaPlayer oursong = MediaPlayer.create(Splash.this,R.raw.musica_sound);
+       // oursong.start();
         Thread timer = new Thread(){
           public void run()
           {
@@ -33,6 +33,9 @@ public class Splash extends Activity
                  Intent opnactvty = new Intent("com.housing.vccalling.OPENINGACTIVITY");
                   Log.d("Intent", opnactvty.getAction());
                   startActivity(opnactvty);
+
+
+
               }
           }
 

@@ -77,8 +77,7 @@ if(flag == 1)
         Log.d("Intent", i.getAction());
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);}
-    //    Intent i = new Intent(context,RecyclerViewActivity.class);
-     //   context.startActivity(i);
+
 
 
 

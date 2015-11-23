@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.rupeevest.imgpro.EditImage">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>
+<!-- From: file:/home/guest/Android/Sdk/extras/google/google_play_services/vccalling/vccalling/effectiveNavigation/src/main/res/menu/menu_edit_image.xml -->

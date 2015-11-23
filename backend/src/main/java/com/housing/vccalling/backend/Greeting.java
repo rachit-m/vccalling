@@ -9,7 +9,9 @@ import com.googlecode.objectify.Key;
 
 import java.lang.String;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The @Entity tells Objectify about our entity.  We also register it in {@link OfyHelper}
@@ -40,7 +42,7 @@ public class Greeting {
     }
 
     /**
-     * A connivence constructor
+     * A convenience constructor
      **/
     public Greeting(String book, String content) {
         this();

@@ -1,1 +1,1 @@
-include ':app', ':backend', 'JsonProject', 'Jsonreader'
+include ':app', ':backend', 'JsonProject', 'Jsonreader', ':volley', 'Swipetabs'

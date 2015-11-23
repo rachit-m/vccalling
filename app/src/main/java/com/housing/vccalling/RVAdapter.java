@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
@@ -48,8 +50,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.personName.setText(persons.get(i).name);
-        personViewHolder.personAge.setText(persons.get(i).designation);
+        personViewHolder.personName.setText(URLDecoder.decode(persons.get(i).name));
+        personViewHolder.personAge.setText(persons.get(i).designation.substring(0,10));
         personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
     }
 
