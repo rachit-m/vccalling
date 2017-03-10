@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textColor="#000"
+        android:id="@+id/ssid"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/text_margin"
+        android:paddingTop="@dimen/text_margin"
+        android:textSize="@dimen/slide_desc"
+        android:paddingLeft="@dimen/desc_padding"
+        android:text="SSID" />
+    <TextView
+        android:textColor="#676C6E"
+        android:id="@+id/alias"
+        android:paddingRight="@dimen/desc_padding"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alias"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Plugged</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="plus_sign_out">Plus</string>
+    <string name="plus_disconnect">Minus</string>
+    <string name="prompt_email">Mobile Number</string>
+    <string name="prompt_password">Password (Optional)</string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="action_sign_in">Sign In / Register</string>
+
+</resources>

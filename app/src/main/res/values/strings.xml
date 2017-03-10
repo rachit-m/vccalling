@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">VC Calling</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">slide_1_title</string>
+    <string name="slide_1_desc">slide_1_desc</string>
+
+    <string name="slide_2_title">slide_2_title</string>
+    <string name="slide_2_desc">slide_2_desc</string>
+    <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
+    <string name="slide_3_title">slide_3_title</string>
+    <string name="slide_3_desc">slide_3_desc</string>
+
+    <string name="slide_4_title">slide_4_title</string>
+    <string name="slide_4_desc">slide_4_desc</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="title_activity_init_tag">InitTagActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="plus_sign_out">Resend</string>
+    <string name="plus_disconnect">Verify</string>
+    <string name="prompt_email">Mobile Number</string>
+    <string name="prompt_otp">Enter OTP</string>
+    <string name="prompt_password">Password(Optional)</string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="action_sign_in">Register</string>
+
+</resources>

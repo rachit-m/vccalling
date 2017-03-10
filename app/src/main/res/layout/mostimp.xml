@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textColor="#000"
+        android:id="@+id/trustname"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/desc_padding"
+        android:paddingTop="@dimen/text_margin"
+        android:textSize="@dimen/slide_desc"
+        android:text="Name" />
+    <TextView
+        android:textColor="#676C6E"
+        android:textSize="10sp"
+        android:id="@+id/trustphone"
+        android:paddingBottom="@dimen/text_margin"
+        android:paddingLeft="@dimen/desc_padding"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/trustname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number"
+        />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/text_margin"
+        android:src="@drawable/wifi_off"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/desc_padding"
+        android:id="@+id/trustwifioff" />
+
+    <ImageView
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_marginTop="@dimen/text_margin"
+        android:visibility="gone"
+    android:src="@drawable/wifi_on"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginRight="@dimen/desc_padding"
+    android:id="@+id/trustwifion" />
+
+    <TextView
+        android:text="Invite"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginRight="20dp"
+        android:id="@+id/notonapp" />
+</RelativeLayout>

@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+    defaultConfig {
+        applicationId "com.labs.poziom.whereabouts"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+       /* jackOptions {
+            enabled true
+        }*/
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+      /*  targetCompatibility 1.8
+        sourceCompatibility 1.8*/
+      /*  sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8*/
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:design:24.1.0'
+    //gson retrofit
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.netflix.rxjava:rxjava-android:0.16.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    //gson retrofit
+    compile "com.android.support:appcompat-v7:24.0.0"
+    testCompile 'junit:junit:4.12'
+    compile 'ch.acra:acra:4.9.0'
+}

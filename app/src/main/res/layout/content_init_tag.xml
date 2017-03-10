@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/com.labs.poziom.whereabouts.InitTagActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.labs.poziom.whereabouts.InitTagActivity"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    tools:showIn="@layout/activity_init_tag">
+    <ListView
+        android:id="@+id/configuredWifiList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+    </ListView>
+
+</android.support.v4.widget.NestedScrollView>-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/com.labs.poziom.whereabouts.InitTagActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.labs.poziom.whereabouts.InitTagActivity"
+    tools:showIn="@layout/activity_init_tag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:id="@+id/configuredWifiList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+    </ListView>
+    </LinearLayout>
