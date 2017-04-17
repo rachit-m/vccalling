@@ -2,6 +2,8 @@ package com.labs.poziom.whereabouts;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,6 +19,8 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CallLog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -67,9 +71,15 @@ public class InitTagActivity extends AppCompatActivity {
     DBStorage db = new DBStorage(this); // data storage for storing aliases
     static  String status = "Not Connected";
     static Integer actual_status = 0;
-    static String[] status_array = new String[] {  "At the movies", "In a meeting", "Battery about to die" };
+    static String[] status_array = new String[] {  "Broker List", "Intern Applications", "Bangalore " };
     static HashMap<String, String> wfAliasSSid = new HashMap<>();
     NumberPicker np;
+    WifilistAdapter wifiProfiles;
+    List<WifiAliasConf> wifiAliasConfs = new ArrayList<>();
+    List<ContactModel> contacts_list = new ArrayList<>();
+    ContactListAdapter contactList;
+
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +101,7 @@ public class InitTagActivity extends AppCompatActivity {
         np.setMinValue(0);
         np.setMaxValue(3);
         np.setValue(actual_status);
-        np.setDisplayedValues( new String[] { status, "At the movies", "In a meeting", "Battery about to die" } );
+        np.setDisplayedValues( new String[] {  "Broker List", "Intern Applications", "Bangalore " });
         np.setWrapSelectorWheel(false);
 
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -113,12 +123,39 @@ public class InitTagActivity extends AppCompatActivity {
         else
             Toast.makeText(getApplication(),"Turn on WIFI",Toast.LENGTH_SHORT).show();
 
-        }
+        Intent intent = getIntent();
+        String amber = intent.getStringExtra("numberInsert");
+
+        if(amber != null)
+        { contacts_list.add(new ContactModel("Unknown", "" ,amber));
+        ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged(); }
+
+        FloatingActionButton floatButton = (FloatingActionButton) findViewById(R.id.fab2);
+        floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             /*   ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+
+                contacts_list.add(new ContactModel("Unknown", "" ,item.getText().toString()));
+                ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();  */
+
+                Intent showCallLog = new Intent();
+                showCallLog.setAction(Intent.ACTION_VIEW);
+                showCallLog.setType(CallLog.Calls.CONTENT_TYPE);
+                showCallLog.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(showCallLog);
+
+
+            }
+        });
+
+
+    }
 
 
     protected void populateList() {
-        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        final List<WifiAliasConf> wifiAliasConfs = new ArrayList<>();
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         List<WifiConfiguration> wifiList;
         wifiList = wifiManager.getConfiguredNetworks();
 //        HashMap<String, String> wfAliasSSid = new HashMap<>();
@@ -135,7 +172,7 @@ public class InitTagActivity extends AppCompatActivity {
         cursor.close();
         for (WifiConfiguration wificonf : wifiList) {
             if (wfAliasSSid.containsKey(wificonf.SSID)) {
-                wifiAliasConfs.add(new WifiAliasConf(wificonf, wfAliasSSid.get(wificonf.SSID)));
+               wifiAliasConfs.add(new WifiAliasConf(wificonf, wfAliasSSid.get(wificonf.SSID)));
             } else {
                 wifiAliasConfs.add(new WifiAliasConf(wificonf, ""));
             }
@@ -148,10 +185,11 @@ public class InitTagActivity extends AppCompatActivity {
             }
 
         });
-        WifilistAdapter wifiProfiles = new WifilistAdapter(getApplicationContext(), (ArrayList<WifiAliasConf>) wifiAliasConfs);
-        final ListView listView = (ListView) findViewById(R.id.configuredWifiList);
+        wifiProfiles = new WifilistAdapter(getApplicationContext(), (ArrayList<WifiAliasConf>) wifiAliasConfs);
+        listView = (ListView) findViewById(R.id.configuredWifiList);
+        contactList = new ContactListAdapter(getApplicationContext(), (ArrayList<ContactModel>) contacts_list);
 
-        listView.setAdapter(wifiProfiles);
+        listView.setAdapter(contactList);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -159,19 +197,19 @@ public class InitTagActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long rowId) {
                 final EditText alias = new EditText(InitTagActivity.this);
-                alias.setHint("Name your Wifi");
+                alias.setHint("Tag this Contact");
                 if(wifiAliasConfs.get(position).alias!=""){
                     alias.setText(wifiAliasConfs.get(position).alias);
                 }
                 AlertDialog.Builder adb = new AlertDialog.Builder(InitTagActivity.this);
                 adb.setTitle("Tag Alias");
-                final WifiAliasConf wiobj = (WifiAliasConf) parent.getItemAtPosition(position);
-                adb.setMessage(wiobj.wificonf.SSID.replaceAll("^\"|\"$", ""));
+                final ContactModel wiobj = (ContactModel) parent.getItemAtPosition(position);
+                adb.setMessage(wiobj.phone.replaceAll("^\"|\"$", ""));
                 adb.setView(alias);
                 adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = alias.getText().toString();
-                        db.insertWifi(wiobj.wificonf.SSID, name);
+                        db.insertWifi(wiobj.phone, name);
                         populateList();
                     }
                 });

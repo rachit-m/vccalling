@@ -33,12 +33,13 @@ public class MyJobService extends JobService {
         NetworkInfo netInfo = conMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
             Log.i("tag", "onstartjob");
-            WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+            WifiManager wifiManager = (WifiManager)  getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             String ssid = wifiInfo.getSSID();
+            String bssid = wifiInfo.getBSSID();
             Log.d("SSID", ssid);
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-            Call<String> call = apiService.createTask(sharedPreferences.getString("phone","9999999999"), ssid, "38-f8-89-0f-8a-c2", "mypassword123");
+            Call<String> call = apiService.createTask(sharedPreferences.getString("phone","9999999999"), ssid, bssid, "mypassword123");
             call.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {

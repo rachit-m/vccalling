@@ -65,7 +65,11 @@ public class NumberAuthLogin extends AppCompatActivity {
                 errorHandler = (TextView) findViewById(R.id.errorhandler);
 
             } else {
-                startActivity(new Intent(this, Contacts.class));
+                Intent intent = new Intent(this,Contacts.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+             //   startActivity(new Intent(this, .class));
             }
             layoutnum = (LinearLayout) findViewById(R.id.email_login_form);
             layoutotp = (LinearLayout) findViewById(R.id.plus_sign_out_buttons);

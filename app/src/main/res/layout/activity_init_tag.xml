@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/com.labs.poziom.whereabouts.InitTagActivity"
 
 
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,6 +49,19 @@
         android:layout_height="match_parent"
         android:layout_weight="0.75" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:backgroundTint="#FFFFFF"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="top|right"
+        android:layout_gravity="center_vertical|center_horizontal"
+        app2:layout_anchor="@+id/app_bar"
+        app2:layout_anchorGravity="bottom|right" />
 
 
 </android.support.design.widget.CoordinatorLayout>

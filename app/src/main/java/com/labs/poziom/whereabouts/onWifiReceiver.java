@@ -65,6 +65,7 @@ public class onWifiReceiver extends BroadcastReceiver {
                         .setPeriodic(2*10000)
                         .build();
                 js.schedule(job);
+               // showNotification(context);
             }
             else {
 
@@ -107,7 +108,7 @@ public class onWifiReceiver extends BroadcastReceiver {
 
 
                     status = "Connected to " + ssid;
-
+//All this logic for knowing the WiFi one is connected to
                 }*/
 
 
@@ -140,13 +141,11 @@ public class onWifiReceiver extends BroadcastReceiver {
     }
 
     private void showNotification(Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                new Intent(context, Contacts.class), 0);
-
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, Contacts.class), 0);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.vc_splash1)
-                        .setContentTitle("WiFi state change")
+                        .setContentTitle("You might call contacts who are online")
                         .setContentText("");
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);

@@ -68,6 +68,7 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
 
         service = retrofit.create(WiFiInfo.class);
         String spacefreePhone = cm.phone.replace(" ","");
+
         call = service.knowWiFi(spacefreePhone.substring(spacefreePhone.length()-10));
         call.enqueue(new Callback<String>() {
             @Override
@@ -131,7 +132,7 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
             public void onClick(View view) {
                 Uri uri = Uri.parse("smsto:" + ((TextView)((RelativeLayout)view.getParent()).findViewById(R.id.trustphone)).getText().toString());
                 Intent i = new Intent(Intent.ACTION_SENDTO, uri);
-                i.putExtra("sms_body", "Download VC Calling for better call expeiences. APK Link https://dl.dropboxusercontent.com/u/2408130/app-debug.apk");
+                i.putExtra("sms_body", "Download VC Calling for better call experiences. https://play.google.com/store/apps/details?id=com.labs.poziom.whereabouts");
              //   i.setPackage("com.whatsapp");
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context1.startActivity(i);
@@ -145,7 +146,7 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
 
                 Intent i = new Intent(context1, Main2Activity.class);
                 i.putExtra("name", cm.name);
-               i.putExtra("phone", cm.phone);
+               i.putExtra("phone", cm.phone.replace(" ",""));
                 i.putExtra("type", cm.id);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context1.startActivity(i);

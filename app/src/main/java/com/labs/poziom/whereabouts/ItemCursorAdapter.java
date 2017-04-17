@@ -86,18 +86,12 @@ public class ItemCursorAdapter extends CursorAdapter {
                     null);*/
             ArrayList<String> phones = new ArrayList<String>();
 
-
-
-
-
-
-
 /*
         Cursor cursor1 = context.getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null,
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = " + contactId,
-                null , null);
+                    null , null);
 */
             while (cursor2.moveToNext()) {
                 phones.add(cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));

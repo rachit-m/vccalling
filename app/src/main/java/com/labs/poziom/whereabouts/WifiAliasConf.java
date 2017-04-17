@@ -8,6 +8,7 @@ import android.net.wifi.WifiConfiguration;
 
 public class WifiAliasConf {
         WifiConfiguration wificonf;
+
         String alias;
         WifiAliasConf(WifiConfiguration wifiProf,String name){
             this.wificonf=wifiProf;

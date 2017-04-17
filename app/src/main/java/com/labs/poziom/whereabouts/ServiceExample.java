@@ -16,6 +16,7 @@ public class ServiceExample  extends Service {
 
     private BroadcastReceiver mReceiver;
            onWifiReceiver wfrcvr= new onWifiReceiver();
+    OutgoingBroadcastReceiver outgng = new OutgoingBroadcastReceiver();
     @Override
     public IBinder onBind(Intent arg0) {
         IntentFilter filter = new IntentFilter();
@@ -31,6 +32,7 @@ public class ServiceExample  extends Service {
         //handleStart(intent, startId);
        // sendToServer();
         getApplicationContext().registerReceiver(wfrcvr, new IntentFilter(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION));
+        getApplicationContext().registerReceiver(outgng, new IntentFilter());
         Log.d("Service", "FirstService started");
         return Service.START_STICKY;
     }

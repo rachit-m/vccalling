@@ -1,10 +1,15 @@
 package com.labs.poziom.whereabouts;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -35,7 +40,7 @@ public class Main2Activity extends AppCompatActivity {
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-
+    private static final int REQUEST_PHONE_CALL = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +118,8 @@ public class Main2Activity extends AppCompatActivity {
                             "vnd.android.cursor.item/vnd.com.whatsapp.voip.call");
                     intent.setPackage("com.whatsapp");
 */
-                    Uri uri = Uri.parse("smsto:" + getIntent().getStringExtra("phone"));
+
+                    Uri uri = Uri.parse("smsto:" + "+91"+ getIntent().getStringExtra("phone").substring(getIntent().getStringExtra("phone").length()-10));
                     Intent i = new Intent(Intent.ACTION_SENDTO, uri);
                     i.putExtra("sms_body", getIntent().getStringExtra("name"));
                     i.setPackage("com.whatsapp");
@@ -134,7 +140,21 @@ public class Main2Activity extends AppCompatActivity {
 */
                 Uri uri = Uri.parse("tel:" + getIntent().getStringExtra("phone"));
                 Intent intnt = new Intent(Intent.ACTION_CALL,uri);
-                startActivity(intnt);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(Main2Activity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(Main2Activity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+                    }
+                    else
+                    {
+                        startActivity(intnt);
+                    }
+                }
+                else
+                {
+                    startActivity(intnt);
+                }
+
+
             }
         });
     }
