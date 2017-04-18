@@ -1,48 +1,28 @@
 package com.labs.poziom.whereabouts;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.ComponentName;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,22 +30,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.R.attr.name;
-import static android.R.attr.theme;
-import static android.R.id.list;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.os.Build.VERSION_CODES.M;
-import static com.labs.poziom.whereabouts.DBStorage.DATABASE_NAME;
-import static com.labs.poziom.whereabouts.DBStorage.TABLE_NAME;
-import static com.labs.poziom.whereabouts.DBStorage.WIFI_ALIAS;
-import static com.labs.poziom.whereabouts.DBStorage.WIFI_SSID;
-import static com.labs.poziom.whereabouts.R.id.ssid;
-import static java.security.AccessController.getContext;
 
 public class InitTagActivity extends AppCompatActivity {
 
@@ -101,7 +65,7 @@ public class InitTagActivity extends AppCompatActivity {
         prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         scoreEditor = prefs.edit();
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if(getSupportActionBar() != null)   getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         np = (NumberPicker) findViewById(R.id.numberPicker1);
