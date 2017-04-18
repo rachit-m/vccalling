@@ -7,21 +7,18 @@ public class ContactModel {
     private String mName;
     private String mId;
     private String mPhone;
-    private String mFirebaseRecordId;
     private String mComment;
 
     public ContactModel(String name, String id, String phone) {
         mName = name;
         mId = id;
         mPhone = phone;
-        mFirebaseRecordId = "";
     }
 
     public ContactModel(String name, String phone) {
         mName = name;
         mPhone = phone;
         mId = "";
-        mFirebaseRecordId = generateRecordId();
     }
 
     public ContactModel() {}
@@ -32,15 +29,15 @@ public class ContactModel {
         if (obj == null)    return false;
         if (getClass() != obj.getClass())   return false;
         ContactModel other = (ContactModel) obj;
-        return mFirebaseRecordId != null && mFirebaseRecordId.equals(other.mFirebaseRecordId);
+        return mPhone.equals(other.mPhone);
     }
 
     @Override
     public String toString() {
-        return "{Name: " + mName + ", Phone: " + mPhone + ", FBId: " + mFirebaseRecordId + "}";
+        return "{Name: " + mName + ", Phone: " + mPhone + "}";
     }
 
-    private String generateRecordId() {
+    static String generateRecordId() {
         SecureRandom random = new SecureRandom();
         StringBuilder stringBuilder = new StringBuilder(new BigInteger(36, 0, random).toString(Character.MAX_RADIX));
         while(stringBuilder.length() > 6) {
@@ -63,6 +60,5 @@ public class ContactModel {
     public String getName() { return mName; }
     public String getId() { return mId; }
     public String getPhone() { return mPhone; }
-    public String getRecordId() { return mFirebaseRecordId; }
     public String getComment() { return mComment; }
 }

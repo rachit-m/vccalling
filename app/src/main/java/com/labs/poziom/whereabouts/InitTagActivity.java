@@ -115,7 +115,7 @@ public class InitTagActivity extends AppCompatActivity {
             ContactModel contactModel = new ContactModel("Unknown", phoneNumber);
             contactModel.setComment("Nice");
             System.out.println(contactModel);
-            mReference.child(contactModel.getRecordId()).setValue(contactModel);
+            mReference.child(ContactModel.generateRecordId()).setValue(contactModel);
             contacts_list.add(contactModel);
             ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();
             Set<String> set = new HashSet<>();
@@ -157,7 +157,7 @@ public class InitTagActivity extends AppCompatActivity {
             contacts_list.clear();
             for (String prev_added : set) {
                 ContactModel contactModel = new Gson().fromJson(prev_added, ContactModel.class);
-                contacts_list.add(contactModel);
+                if(contacts_list.contains(contactModel))    contacts_list.add(contactModel);
             }
         }
 
@@ -250,6 +250,7 @@ public class InitTagActivity extends AppCompatActivity {
                         ContactModel contactModel = snapshot.getValue(ContactModel.class);
                         if(!contacts_list.contains(contactModel)) {
                             contacts_list.add(contactModel);
+                            ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();
                         }
                     }
                 }
