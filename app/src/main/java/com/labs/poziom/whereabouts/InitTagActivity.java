@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Movie;
@@ -48,6 +49,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,9 +79,13 @@ public class InitTagActivity extends AppCompatActivity {
     WifilistAdapter wifiProfiles;
     List<WifiAliasConf> wifiAliasConfs = new ArrayList<>();
     List<ContactModel> contacts_list = new ArrayList<>();
+    static List<String> interim_list = new ArrayList<>();
     ContactListAdapter contactList;
 
     ListView listView;
+    public static final String MyPREFERENCES = "myprefs";
+    SharedPreferences prefs;
+    SharedPreferences.Editor scoreEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,9 @@ public class InitTagActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        scoreEditor = prefs.edit();
+
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
@@ -101,7 +110,8 @@ public class InitTagActivity extends AppCompatActivity {
         np.setMinValue(0);
         np.setMaxValue(3);
         np.setValue(actual_status);
-        np.setDisplayedValues( new String[] {  "Broker List", "Intern Applications", "Bangalore " });
+        np.setDisplayedValues( new String[] {  "Broker List", "Intern Applications", "Bangalore " , "Companies" });
+        np.setWrapSelectorWheel(false);
         np.setWrapSelectorWheel(false);
 
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -128,7 +138,14 @@ public class InitTagActivity extends AppCompatActivity {
 
         if(amber != null)
         { contacts_list.add(new ContactModel("Unknown", "" ,amber));
-        ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged(); }
+        ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();
+        interim_list.add(amber);
+            Set<String> set = new HashSet<String>();
+            set.addAll(interim_list);
+            scoreEditor.putStringSet("key", set);
+            scoreEditor.commit();
+
+        }
 
         FloatingActionButton floatButton = (FloatingActionButton) findViewById(R.id.fab2);
         floatButton.setOnClickListener(new View.OnClickListener() {
@@ -155,9 +172,27 @@ public class InitTagActivity extends AppCompatActivity {
 
 
     protected void populateList() {
+
+
+        Set<String> set = prefs.getStringSet("key", null);
+        if(set != null) {
+            contacts_list.clear();
+            for (String prev_added : set) {
+                contacts_list.add(new ContactModel("Unknown", "", prev_added));
+            }
+        }
+
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         List<WifiConfiguration> wifiList;
-        wifiList = wifiManager.getConfiguredNetworks();
+
+        //risky attempt to get the shared preferences
+
+
+       wifiList = wifiManager.getConfiguredNetworks();
+
+
+
+
 //        HashMap<String, String> wfAliasSSid = new HashMap<>();
 
         final Cursor cursor = db.getAllProfiles();
