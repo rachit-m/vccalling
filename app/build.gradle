@@ -9,7 +9,7 @@ android {
         targetSdkVersion 25
         versionCode 3
         versionName "3.0"
-       /* jackOptions {
+        /* jackOptions {
             enabled true
         }*/
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,27 +21,31 @@ android {
         }
     }
     compileOptions {
-      /*  targetCompatibility 1.8
+        /*  targetCompatibility 1.8
         sourceCompatibility 1.8*/
-      /*  sourceCompatibility JavaVersion.VERSION_1_8
+        /*  sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8*/
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:design:25.3.1'
     //gson retrofit
+    //gson retrofit
+    compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.netflix.rxjava:rxjava-android:0.16.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    //gson retrofit
-    compile "com.android.support:appcompat-v7:25.3.1"
-    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'ch.acra:acra:4.9.0'
+    compile 'com.google.firebase:firebase-database:10.0.1'
+    testCompile 'junit:junit:4.12'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

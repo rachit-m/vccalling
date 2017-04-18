@@ -32,8 +32,8 @@ public class ContactListAdapter extends ArrayAdapter<ContactModel> {
         TextView tvName = (TextView) convertView.findViewById(R.id.ssid);
         TextView tvAlias=(TextView)  convertView.findViewById(R.id.alias);
         // Populate the data into the template view using the data object
-        tvName.setText(contact_par.phone.replaceAll("^\"|\"$", ""));
-        tvAlias.setText(contact_par.id);
+        tvName.setText(contact_par.getPhone().replaceAll("^\"|\"$", ""));
+        tvAlias.setText(contact_par.getId());
         // Return the completed view to render on screen
         return convertView;
     }

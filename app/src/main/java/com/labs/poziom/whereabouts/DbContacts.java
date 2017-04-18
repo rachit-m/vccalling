@@ -6,12 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static android.os.Build.ID;
-import static com.labs.poziom.whereabouts.DBStorage.WIFI_ALIAS;
-import static com.labs.poziom.whereabouts.DBStorage.WIFI_COLUMN_ID;
-import static com.labs.poziom.whereabouts.DBStorage.WIFI_SSID;
-import static com.labs.poziom.whereabouts.R.id.ssid;
-
 /**
  * Created by Sandy on 10-01-2017.
  */

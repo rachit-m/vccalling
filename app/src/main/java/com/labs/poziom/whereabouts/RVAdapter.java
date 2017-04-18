@@ -43,8 +43,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.personName.setText(persons.get(i).name);
-        personViewHolder.personPhone.setText(persons.get(i).id);
+        personViewHolder.personName.setText(persons.get(i).getName());
+        personViewHolder.personPhone.setText(persons.get(i).getId());
       //  personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
     }
 

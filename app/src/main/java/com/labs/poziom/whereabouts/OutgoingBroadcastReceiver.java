@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class OutgoingBroadcastReceiver extends BroadcastReceiver {
+    private static String sPhoneNumber;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -99,7 +100,8 @@ public class OutgoingBroadcastReceiver extends BroadcastReceiver {
 
 
         Intent i = new Intent(context, InitTagActivity.class);
-        i.putExtra("numberInsert", phone);
+        sPhoneNumber = phone;
+        //i.putExtra("numberInsert", phone);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context,1, i, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder =
@@ -135,4 +137,6 @@ public class OutgoingBroadcastReceiver extends BroadcastReceiver {
         mNotificationManager.notify(1, mBuilder.build());   */
 
     }
+
+    public static String getPhoneNumber() { return sPhoneNumber; }
 }

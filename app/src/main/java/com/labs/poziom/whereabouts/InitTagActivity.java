@@ -23,6 +23,13 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,6 +37,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.labs.poziom.whereabouts.OutgoingBroadcastReceiver.getPhoneNumber;
 
 public class InitTagActivity extends AppCompatActivity {
 
@@ -43,7 +52,7 @@ public class InitTagActivity extends AppCompatActivity {
     WifilistAdapter wifiProfiles;
     List<WifiAliasConf> wifiAliasConfs = new ArrayList<>();
     List<ContactModel> contacts_list = new ArrayList<>();
-    static List<String> interim_list = new ArrayList<>();
+    private DatabaseReference mReference;
     ContactListAdapter contactList;
 
     ListView listView;
@@ -57,10 +66,10 @@ public class InitTagActivity extends AppCompatActivity {
         setContentView(R.layout.activity_init_tag);
         ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
         stub.setLayoutResource(R.layout.content_init_tag);
-        View inflated = stub.inflate();
+        stub.inflate();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        initFirebase();
 
         prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         scoreEditor = prefs.edit();
@@ -97,18 +106,24 @@ public class InitTagActivity extends AppCompatActivity {
         else
             Toast.makeText(getApplication(),"Turn on WIFI",Toast.LENGTH_SHORT).show();
 
-        Intent intent = getIntent();
-        String amber = intent.getStringExtra("numberInsert");
+        //Intent intent = getIntent();
+        //String phoneNumber = intent.getStringExtra("numberInsert");
+        //System.out.println(sPhoneNumber);
 
-        if(amber != null)
-        { contacts_list.add(new ContactModel("Unknown", "" ,amber));
-        ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();
-        interim_list.add(amber);
-            Set<String> set = new HashSet<String>();
-            set.addAll(interim_list);
+        String phoneNumber;
+        if((phoneNumber = getPhoneNumber()) != null) {
+            ContactModel contactModel = new ContactModel("Unknown", phoneNumber);
+            contactModel.setComment("Nice");
+            System.out.println(contactModel);
+            mReference.child(contactModel.getRecordId()).setValue(contactModel);
+            contacts_list.add(contactModel);
+            ((ContactListAdapter)listView.getAdapter()).notifyDataSetChanged();
+            Set<String> set = new HashSet<>();
+            for(ContactModel contact: contacts_list) {
+                set.add(new Gson().toJson(contact));
+            }
             scoreEditor.putStringSet("key", set);
-            scoreEditor.commit();
-
+            scoreEditor.apply();
         }
 
         FloatingActionButton floatButton = (FloatingActionButton) findViewById(R.id.fab2);
@@ -137,12 +152,12 @@ public class InitTagActivity extends AppCompatActivity {
 
     protected void populateList() {
 
-
         Set<String> set = prefs.getStringSet("key", null);
         if(set != null) {
             contacts_list.clear();
             for (String prev_added : set) {
-                contacts_list.add(new ContactModel("Unknown", "", prev_added));
+                ContactModel contactModel = new Gson().fromJson(prev_added, ContactModel.class);
+                contacts_list.add(contactModel);
             }
         }
 
@@ -197,18 +212,18 @@ public class InitTagActivity extends AppCompatActivity {
                                     int position, long rowId) {
                 final EditText alias = new EditText(InitTagActivity.this);
                 alias.setHint("Tag this Contact");
-                if(wifiAliasConfs.get(position).alias!=""){
+                if(!wifiAliasConfs.get(position).alias.equals("")){
                     alias.setText(wifiAliasConfs.get(position).alias);
                 }
                 AlertDialog.Builder adb = new AlertDialog.Builder(InitTagActivity.this);
                 adb.setTitle("Tag Alias");
                 final ContactModel wiobj = (ContactModel) parent.getItemAtPosition(position);
-                adb.setMessage(wiobj.phone.replaceAll("^\"|\"$", ""));
+                adb.setMessage(wiobj.getPhone().replaceAll("^\"|\"$", ""));
                 adb.setView(alias);
                 adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = alias.getText().toString();
-                        db.insertWifi(wiobj.phone, name);
+                        db.insertWifi(wiobj.getPhone(), name);
                         populateList();
                     }
                 });
@@ -223,5 +238,29 @@ public class InitTagActivity extends AppCompatActivity {
             listView.setNestedScrollingEnabled(true);
         }*/
     }
+
+    private void initFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mReference = database.getReference().child("Lists");
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        ContactModel contactModel = snapshot.getValue(ContactModel.class);
+                        if(!contacts_list.contains(contactModel)) {
+                            contacts_list.add(contactModel);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+    }
+
 
 }

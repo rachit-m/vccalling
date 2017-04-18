@@ -62,12 +62,12 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
 
 
         // Populate the data into the template view using the data object
-        tvName.setText(cm.name);
-        tvAlias.setText(cm.phone);
+        tvName.setText(cm.getName());
+        tvAlias.setText(cm.getPhone());
 
 
         service = retrofit.create(WiFiInfo.class);
-        String spacefreePhone = cm.phone.replace(" ","");
+        String spacefreePhone = cm.getPhone().replace(" ","");
 
         call = service.knowWiFi(spacefreePhone.substring(spacefreePhone.length()-10));
         call.enqueue(new Callback<String>() {
@@ -145,9 +145,9 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
             public void onClick(View view) {
 
                 Intent i = new Intent(context1, Main2Activity.class);
-                i.putExtra("name", cm.name);
-               i.putExtra("phone", cm.phone.replace(" ",""));
-                i.putExtra("type", cm.id);
+                i.putExtra("name", cm.getName());
+               i.putExtra("phone", cm.getPhone().replace(" ",""));
+                i.putExtra("type", cm.getId());
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context1.startActivity(i);
 
