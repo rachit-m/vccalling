@@ -157,7 +157,7 @@ public class InitTagActivity extends AppCompatActivity {
             contacts_list.clear();
             for (String prev_added : set) {
                 ContactModel contactModel = new Gson().fromJson(prev_added, ContactModel.class);
-                if(contacts_list.contains(contactModel))    contacts_list.add(contactModel);
+                if(!contacts_list.contains(contactModel))    contacts_list.add(contactModel);
             }
         }
 
