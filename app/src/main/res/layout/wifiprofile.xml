@@ -25,5 +25,19 @@
         android:text="Alias"
         />
 
+    <ImageButton
+        android:src="@android:drawable/ic_input_add"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/ssid"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        android:tint="@color/colorAccent"
+        android:id="@+id/adder" />
+
 
 </RelativeLayout>

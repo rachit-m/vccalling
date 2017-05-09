@@ -107,7 +107,7 @@ public class OutgoingBroadcastReceiver extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.vc_splash1)
-                        .setContentTitle("You might add this contact to a list")
+                        .setContentTitle("You might add "+phone+" to a list")
                         .setContentText("VC Calling");
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);

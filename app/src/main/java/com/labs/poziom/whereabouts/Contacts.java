@@ -9,11 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewStub;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -27,8 +25,6 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,11 +32,8 @@ import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,12 +58,20 @@ public class Contacts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacts);
         SharedPreferences sharedPreferences= getSharedPreferences("phone", Context.MODE_PRIVATE);
-        if (Build.VERSION.SDK_INT >= 23) {
+
+       if (Build.VERSION.SDK_INT >= 23) {
 
             int hasWriteContactsPermission = checkSelfPermission(Manifest.permission.READ_CONTACTS);
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[] {Manifest.permission.READ_CONTACTS},
                         REQUEST_CODE_ASK_PERMISSIONS);
+                String[] PERMISSIONS = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.PROCESS_OUTGOING_CALLS,Manifest.permission.CALL_PHONE};
+
+                for(int i=0;i<PERMISSIONS.length;i++) {
+                        ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
+
+                }
+
                 return;
             }
 
@@ -187,17 +188,27 @@ public class Contacts extends AppCompatActivity {
 
     public void createList() {
         ArrayList<ContactModel> contact = new ArrayList<>();
-        Cursor cursor = db.getAllContacts();
-        if (cursor.moveToFirst()) {
-            do {
-                String id = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_ID));
-                String contacts = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_NAME));
-                String number = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_NUMBER));
 
-                contact.add(new ContactModel(contacts, id, number));
-            } while (cursor.moveToNext());
+        if(getIntent().getExtras() == null) {
+            Cursor cursor = db.getAllContacts();
+            if (cursor.moveToFirst()) {
+                do {
+                    String id = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_ID));
+                    String contacts = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_NAME));
+                    String number = cursor.getString(cursor.getColumnIndexOrThrow(DbContacts.CONTACT_NUMBER));
+
+                    contact.add(new ContactModel(contacts, id, number));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
         }
-        cursor.close();
+        else
+        {
+
+            for(ContactModel each : InitTagActivity.contacts_list)
+                contact.add(each);
+
+        }
         for (ContactModel element : contact) {
             if (!uniques.contains(element)) {
                 uniques.add(element);

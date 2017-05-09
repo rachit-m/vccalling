@@ -29,7 +29,7 @@ public class PhoneCallReceiver extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.vc_splash1)
-                        .setContentTitle("You might add this contact to a list")
+                        .setContentTitle("You might add "+numberInsert+" to a list")
                         .setContentText("");
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);

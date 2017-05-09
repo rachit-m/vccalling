@@ -19,8 +19,7 @@ import java.util.ArrayList;
 
 import static android.R.attr.id;
 import static android.R.attr.phoneNumber;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 
 
 /**

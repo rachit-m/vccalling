@@ -30,11 +30,11 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".PhoneCallReceiver">
+        <!--receiver android:name=".PhoneCallReceiver">
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
-        </receiver>
+        </receiver-->
         <receiver android:name=".OutgoingBroadcastReceiver">
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />

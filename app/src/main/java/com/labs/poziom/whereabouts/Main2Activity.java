@@ -4,8 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
+
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -140,8 +139,10 @@ public class Main2Activity extends AppCompatActivity {
 */
                 Uri uri = Uri.parse("tel:" + getIntent().getStringExtra("phone"));
                 Intent intnt = new Intent(Intent.ACTION_CALL,uri);
+                startActivity(intnt);
+
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(Main2Activity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(Main2Activity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
                     }
                     else

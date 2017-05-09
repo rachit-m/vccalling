@@ -16,12 +16,12 @@ import static org.acra.ReportField.LOGCAT;
 import static org.acra.ReportField.PHONE_MODEL;
 import static org.acra.ReportField.STACK_TRACE;
 
-/*@ReportsCrashes(
+@ReportsCrashes(
         formUri = "http://52.27.54.85/blog/rad_app/testapi.php",
         customReportContent = { ANDROID_VERSION, PHONE_MODEL, CUSTOM_DATA, STACK_TRACE},
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text
-)*/
+)
 /*
 @ReportsCrashes(mailTo = "rachit.iitkgp@gmail.com",
         mode = ReportingInteractionMode.TOAST,
